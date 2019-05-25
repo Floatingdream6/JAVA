@@ -3,17 +3,19 @@ package Util;
 public class ShopInfo {
     private String shopname;                //名称
     private double shopprice;               //价格
-    private String shopnumber;              //数量
+    private int shopnumber;              //数量
     private String shoparea;               //产地
+    private String owner;                   //拥有者
 
     public ShopInfo() {
     }
 
-    public ShopInfo(String shopname, double shopprice, String shopnumber, String shoparea) {
+    public ShopInfo(String shopname, double shopprice, int shopnumber, String shoparea, String owner) {
         this.shopname = shopname;
         this.shopprice = shopprice;
         this.shopnumber = shopnumber;
         this.shoparea = shoparea;
+        this.owner = owner;
     }
 
     public String getShopname() {
@@ -32,11 +34,11 @@ public class ShopInfo {
         this.shopprice = shopprice;
     }
 
-    public String getShopnumber() {
+    public int getShopnumber() {
         return shopnumber;
     }
 
-    public void setShopnumber(String shopnumber) {
+    public void setShopnumber(int shopnumber) {
         this.shopnumber = shopnumber;
     }
 
@@ -46,5 +48,13 @@ public class ShopInfo {
 
     public void setShoparea(String shoparea) {
         this.shoparea = shoparea;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

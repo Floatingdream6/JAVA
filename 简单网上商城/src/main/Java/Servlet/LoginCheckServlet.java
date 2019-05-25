@@ -3,7 +3,7 @@ package Servlet;
 import DAOImpl.ShopDemoDAOImpl;
 import Util.User;
 
-import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -16,6 +16,10 @@ public class LoginCheckServlet extends javax.servlet.http.HttpServlet {
         ShopDemoDAOImpl sdl = new ShopDemoDAOImpl();
         User user = sdl.SearchByName(username);
         if(user!=null&&user.getPassword().equals(password)){
+            HttpSession session = request.getSession();
+            session.setAttribute("username",username);
+            session.setAttribute("user",user);
+            //session.setMaxInactiveInterval(10);
             request.getRequestDispatcher("/JspPage/SuccessPage.jsp").forward(request,response);
         }else{
             PrintWriter p = response.getWriter();

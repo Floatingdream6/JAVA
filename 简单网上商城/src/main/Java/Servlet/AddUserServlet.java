@@ -24,7 +24,7 @@ public class AddUserServlet extends HttpServlet {
         String password = request.getParameter("password");
         PrintWriter p = response.getWriter();
         try {
-            if (new ShopDemoDAOImpl().AddUser(new User(name, id, password)) == 1) {
+            if (new ShopDemoDAOImpl().AddUser(new User(name, id, password,0)) == 1) {
                 p.println("<script language='javascript'>");
                 p.println("alert('注册成功！');");
                 p.println("window.location.href='/ShopDemo_war_exploded/index.jsp'");

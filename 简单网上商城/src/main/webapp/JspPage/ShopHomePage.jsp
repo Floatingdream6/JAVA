@@ -35,7 +35,6 @@
         border-radius: 10px 10px 10px 10px;
         height:200px;
         width:400px;
-
     }
     #button1{
         position: absolute;
@@ -73,7 +72,7 @@
     <a class="navbar-brand" href="#">简易网上商城</a>
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="/ShopDemo_war_exploded/JspPage/ShopHomePage.jsp">首页</a>
+            <a class="nav-link" href="#">首页</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#" onclick="javascipt:alert('请先登录！');location.href='/ShopDemo_war_exploded/index.jsp'">购物车</a>
@@ -120,12 +119,20 @@
         var m = document.getElementById("searchmessage");
         var e = event || window.event || arguments.callee.caller.arguments[0];
         if(e && e.keyCode==13){
-            window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+            if(m.value=='') {
+                alert('搜索条件为空！');
+            }else{
+                window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+            }
         }
     }
     function search() {
         var m = document.getElementById("searchmessage");
-        window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+        if(m.value==''){
+            alert('搜索条件为空！');
+        }else{
+            window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+        }
     }
 </script>
 </body>

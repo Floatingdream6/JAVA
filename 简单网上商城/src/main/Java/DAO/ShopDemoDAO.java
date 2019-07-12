@@ -19,4 +19,12 @@ public interface ShopDemoDAO {
     public int AddUser(User user);
     public ArrayList<ShopInfo> SearchShopinfo(String message);
     public void CutShopInfoNumber(String shopname,int number);
+    public void DeleteShopCar(String shopname,String owner);
+    public int SearchShopcar(String shopname,String owner);
+    public void UpdateShopCar(String shopname,String owner);
+    public void UpdatePageShopCar(String shopname,String owner);
+    public void ShopCarClear(String shopname,String owner);
+    public int DeleteShop(String shopname);
+    public int AddShop(ShopInfo shop);
+    public int ModifyShopInfo(ShopInfo shop);
 }

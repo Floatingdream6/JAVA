@@ -20,7 +20,11 @@ public class LoginCheckServlet extends javax.servlet.http.HttpServlet {
             session.setAttribute("username",username);
             session.setAttribute("user",user);
             //session.setMaxInactiveInterval(10);
-            request.getRequestDispatcher("/JspPage/SuccessPage.jsp").forward(request,response);
+            if(user.getIdentity()==0) {
+                request.getRequestDispatcher("/JspPage/SuccessPage.jsp").forward(request, response);
+            }else{
+                request.getRequestDispatcher("/JspPage/AdminPersonCenterPage.jsp").forward(request, response);
+            }
         }else{
             PrintWriter p = response.getWriter();
             p.println("<script language='javascript'>");

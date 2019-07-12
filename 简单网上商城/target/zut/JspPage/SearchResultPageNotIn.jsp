@@ -31,18 +31,10 @@
             width: 35px;
             height:35px;
         }
-        #h61{
-            position: absolute;
-            width: 100px;
-            top: 20px;
-            left: 1420px;
-            color: white;
-        }
     </style>
 </head>
 <body>
 <%
-    User user = new ShopDemoDAOImpl().SearchByName((String) request.getSession().getAttribute("username"));
     HttpSession httpSession = request.getSession();
     String message = (String)httpSession.getAttribute("message");
     ArrayList<ShopInfo> list = new ShopDemoDAOImpl().SearchShopinfo(message);
@@ -51,7 +43,7 @@
     <a class="navbar-brand" href="#">简易网上商城</a>
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="/ShopDemo_war_exploded/JspPage/SuccessPage.jsp">首页</a>
+            <a class="nav-link" href="/ShopDemo_war_exploded/JspPage/ShopHomePage.jsp">首页</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/ShopDemo_war_exploded/JspPage/ShopCar.jsp">购物车</a>
@@ -59,12 +51,9 @@
         <li class="nav-item">
             <a class="nav-link" href="/ShopDemo_war_exploded/JspPage/UserPersonCenter.jsp">个人中心</a>
         </li>
-        <li style="text-align: center">
-            <h6 id="h61"><%= user.getPetname() %></h6>
-        </li>
     </ul>
 </nav>
-<div class="col-sm-4" style="width:330px;position: relative;top:10px;left: 1090px;z-index: 140;">
+<div class="col-sm-4" style="width:330px;position: relative;top:10px;left: 1200px;z-index: 140;">
     <div class="input-group">
         <input type="text" id="searchmessage" class="form-control" style="border-radius: 4px;height: 35px;" onkeydown="onKeyDown(event)"/>
         <img id="img2" src="/ShopDemo_war_exploded/Image/搜索.png" onclick="search()">
@@ -98,12 +87,20 @@
         var m = document.getElementById("searchmessage");
         var e = event || window.event || arguments.callee.caller.arguments[0];
         if(e && e.keyCode==13){
-            window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+            if(m.value=='') {
+                alert('搜索条件为空！');
+            }else{
+                window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+            }
         }
     }
     function search() {
         var m = document.getElementById("searchmessage");
-        window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+        if(m.value==''){
+            alert('搜索条件为空！');
+        }else{
+            window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+        }
     }
 </script>
 </body>

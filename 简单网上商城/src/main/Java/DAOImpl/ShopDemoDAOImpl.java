@@ -12,7 +12,6 @@ import java.util.Date;
 
 public class ShopDemoDAOImpl implements ShopDemoDAO {
 
-
     @Override
     public ArrayList<ShopInfo> SerchAll() {
         Statement st=null;
@@ -58,6 +57,7 @@ public class ShopDemoDAOImpl implements ShopDemoDAO {
                 user.setUsername(username);
                 user.setPassword(rs.getString("PassWord"));
                 user.setPetname(rs.getString("UserName"));
+                user.setIdentity(rs.getInt("Identity"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -184,6 +184,7 @@ public class ShopDemoDAOImpl implements ShopDemoDAO {
                 address.setTelephone(rs.getInt("Telephone"));
                 address.setAddress(rs.getString("Address"));
                 address.setOwner(rs.getString("Owner"));
+                address.setAcquiesce(rs.getString("Acquiesce"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -204,7 +205,7 @@ public class ShopDemoDAOImpl implements ShopDemoDAO {
             con= MySQLConnection.getConn();
             ps = con.prepareStatement(sql);
             ps.setString(1,shopinfo.getShopname());
-            ps.setInt(2,shopinfo.getShopnumber());
+            ps.setInt(2,1);
             ps.setDouble(3,shopinfo.getShopprice());
             ps.setString(4,owner);
             ps.executeUpdate();
@@ -252,12 +253,13 @@ public class ShopDemoDAOImpl implements ShopDemoDAO {
         ResultSet rs=null;
         int n=0;
         try {
-            String sql="insert into personinfo value (?,?,?)";
+            String sql="insert into personinfo value (?,?,?,?)";
             con= MySQLConnection.getConn();
             ps = con.prepareStatement(sql);
             ps.setString(1,user.getPetname());
             ps.setString(2,user.getUsername());
             ps.setString(3,user.getPassword());
+            ps.setInt(4,user.getIdentity());
             n = ps.executeUpdate();
         } catch (Exception e) {
         }finally{
@@ -315,6 +317,195 @@ public class ShopDemoDAOImpl implements ShopDemoDAO {
             e.printStackTrace();
         }finally {
             MySQLConnection.closeAll(con, st, rs);
+        }
+    }
+
+    @Override
+    public void DeleteShopCar(String shopname,String owner) {
+        Statement st=null;
+        Connection con=null;
+        PreparedStatement ps =null;
+        ResultSet rs=null;
+        try {
+            String sql ="delete from shopcar where Name=? and Owner=?";
+            con= MySQLConnection.getConn();
+            ps = con.prepareStatement(sql);
+            ps.setString(1,shopname);
+            ps.setString(2,owner);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            MySQLConnection.closeAll(con, st, rs);
+        }
+    }
+
+
+    @Override
+    public int SearchShopcar(String shopname,String owner) {
+        Statement st=null;
+        Connection con=null;
+        PreparedStatement ps =null;
+        ResultSet rs=null;
+        int flag=0;
+        try {
+            String sql ="select * from shopcar where Name=? and Owner=?";
+            con= MySQLConnection.getConn();
+            ps = con.prepareStatement(sql);
+            ps.setString(1,shopname);
+            ps.setString(2,owner);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                flag = 1;
+            }else{
+                flag = -1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            MySQLConnection.closeAll(con, st, rs);
+            return flag;
+        }
+    }
+
+    @Override
+    public void UpdateShopCar(String shopname, String owner) {
+        Statement st=null;
+        Connection con=null;
+        PreparedStatement ps =null;
+        ResultSet rs=null;
+        try {
+            String sql ="update shopcar set Number=Number+1 where Name=? and Owner=?";
+            con= MySQLConnection.getConn();
+            ps = con.prepareStatement(sql);
+            ps.setString(1,shopname);
+            ps.setString(2,owner);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            MySQLConnection.closeAll(con, st, rs);
+        }
+    }
+
+    @Override
+    public void UpdatePageShopCar(String shopname, String owner) {
+        Statement st=null;
+        Connection con=null;
+        PreparedStatement ps =null;
+        ResultSet rs=null;
+        try {
+            String sql ="update shopcar set Number=Number-1 where Name=? and Owner=?";
+            con= MySQLConnection.getConn();
+            ps = con.prepareStatement(sql);
+            ps.setString(1,shopname);
+            ps.setString(2,owner);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            MySQLConnection.closeAll(con, st, rs);
+        }
+    }
+
+    @Override
+    public void ShopCarClear(String shopname, String owner) {
+        Statement st=null;
+        Connection con=null;
+        PreparedStatement ps =null;
+        ResultSet rs=null;
+        try {
+            String sql ="delete from shopcar where Name=? and Owner=?";
+            con= MySQLConnection.getConn();
+            ps = con.prepareStatement(sql);
+            ps.setString(1,shopname);
+            ps.setString(2,owner);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            MySQLConnection.closeAll(con, st, rs);
+        }
+    }
+
+    @Override
+    public int DeleteShop(String shopname) {
+        Statement st=null;
+        Connection con=null;
+        PreparedStatement ps =null;
+        ResultSet rs=null;
+        int n = 0;
+        try {
+            String sql ="delete from shopinfo where Name=?";
+            con= MySQLConnection.getConn();
+            ps = con.prepareStatement(sql);
+            ps.setString(1,shopname);
+            n=ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            MySQLConnection.closeAll(con, st, rs);
+        }
+        if(n>0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    @Override
+    public int AddShop(ShopInfo shop) {
+        Statement st=null;
+        Connection con=null;
+        PreparedStatement ps =null;
+        ResultSet rs=null;
+        int n = 0;
+        try {
+            String sql ="insert into shopinfo value (?,?,?,?)";
+            con= MySQLConnection.getConn();
+            ps = con.prepareStatement(sql);
+            ps.setString(1,shop.getShopname());
+            ps.setDouble(2,shop.getShopprice());
+            ps.setInt(3,shop.getShopnumber());
+            ps.setString(4,shop.getShoparea());
+            n=ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            MySQLConnection.closeAll(con, st, rs);
+        }
+        if(n>0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    @Override
+    public int ModifyShopInfo(ShopInfo shop) {
+        Statement st=null;
+        Connection con=null;
+        PreparedStatement ps =null;
+        ResultSet rs=null;
+        int n = 0;
+        try {
+            String sql ="update shopinfo set Price=?,Number=?,Area=? where Name=?";
+            con= MySQLConnection.getConn();
+            ps = con.prepareStatement(sql);
+            ps.setDouble(1,shop.getShopprice());
+            ps.setInt(2,shop.getShopnumber());
+            ps.setString(3,shop.getShoparea());
+            ps.setString(4,shop.getShopname());
+            n=ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            MySQLConnection.closeAll(con, st, rs);
+        }
+        if(n>0){
+            return 1;
+        }else{
+            return 0;
         }
     }
 }

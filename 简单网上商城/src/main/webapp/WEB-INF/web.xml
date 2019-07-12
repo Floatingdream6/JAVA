@@ -58,4 +58,52 @@
         <servlet-name>ShopNumberCutServlet</servlet-name>
         <url-pattern>/Servlet/ShopNumberCutServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+    <servlet-name>ShopCarServlet</servlet-name>
+    <servlet-class>Servlet.ShopCarServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShopCarServlet</servlet-name>
+        <url-pattern>/Servlet/ShopCarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    <servlet-name>PageShopCarServlet</servlet-name>
+    <servlet-class>Servlet.PageShopCarServlet</servlet-class>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>PageShopCarServlet</servlet-name>
+        <url-pattern>/Servlet/PageShopCarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    <servlet-name>AccountsShopCarServlet</servlet-name>
+    <servlet-class>Servlet.AccountsShopCarServlet</servlet-class>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>AccountsShopCarServlet</servlet-name>
+        <url-pattern>/Servlet/AccountsShopCarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    <servlet-name>DeleteShopServlet</servlet-name>
+    <servlet-class>Servlet.DeleteShopServlet</servlet-class>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteShopServlet</servlet-name>
+        <url-pattern>/Servlet/DeleteShopServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddShopServlet</servlet-name>
+        <servlet-class>Servlet.AddShopServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddShopServlet</servlet-name>
+        <url-pattern>/Servlet/AddShopServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ModifyShopInfoServlet</servlet-name>
+        <servlet-class>Servlet.ModifyShopInfoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ModifyShopInfoServlet</servlet-name>
+        <url-pattern>/Servlet/ModifyShopInfoServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

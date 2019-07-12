@@ -18,8 +18,14 @@ public class AddShopCarServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         String shopname = request.getParameter("shopname");
-        ShopInfo shopinfo = new ShopDemoDAOImpl().SerachShop(shopname);
-        new ShopDemoDAOImpl().AddShopCar(shopinfo,(String)request.getSession().getAttribute("username"));
+        String owner = (String)request.getSession().getAttribute("username");
+        ShopDemoDAOImpl sdl = new ShopDemoDAOImpl();
+        if(sdl.SearchShopcar(shopname,owner)==1){
+            sdl.UpdateShopCar(shopname,owner);
+        }else{
+            ShopInfo shopinfo = new ShopDemoDAOImpl().SerachShop(shopname);
+            sdl.AddShopCar(shopinfo,owner);
+        }
         response.sendRedirect("/ShopDemo_war_exploded/JspPage/SuccessPage.jsp");
     }
 }

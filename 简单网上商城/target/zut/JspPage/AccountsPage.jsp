@@ -1,7 +1,8 @@
 <%@ page import="DAOImpl.ShopDemoDAOImpl" %>
 <%@ page import="Util.ShopInfo" %>
 <%@ page import="Util.Address" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="org.omg.Messaging.SYNC_WITH_TRANSPORT" %><%--
   Created by IntelliJ IDEA.
   User: Lenovo
   Date: 2019/4/25
@@ -93,7 +94,7 @@
         height: 20px;
         width: 20px;
         top: 90px;
-        right: 500px;
+        right: 490px;
     }
     #img3{
         position: absolute;
@@ -193,6 +194,22 @@
         top: 106px;
         left: 656px;
     }
+    #rec8{
+        position: absolute;
+        color: red;
+        font-size: 13px;
+        top: 104px;
+        left:593px;
+        display: block;
+    }
+    #rec9{
+        position: absolute;
+        border:0px solid white;
+        width: 500px;
+        font-size: 80%;
+        top: 106px;
+        left: 656px;
+    }
 </style>
 <body onload="cal();acount()">
 <img id="img10" src="/ShopDemo_war_exploded/Image/返回.png" onclick="back()">
@@ -202,6 +219,7 @@
     ArrayList<Address> list = new ShopDemoDAOImpl().SerchAddress();
     String name = request.getParameter("name");
     String shopname = request.getParameter("shopname");
+    request.getSession().setAttribute("shopname",shopname);
     ShopInfo shopinfo = new ShopDemoDAOImpl().SerachShop(shopname);
     Address ads = null;
     if(name==null) {
@@ -229,9 +247,22 @@
 <div>
     <img id="img1" src="/ShopDemo_war_exploded/Image/地址.png">
     <a href="AddressPage.jsp?shopname=<%= shopname %>"><img id="img2" src="/ShopDemo_war_exploded/Image/右箭头.png"></a>
+    <%
+        if(ads.getAcquiesce().equals("是")){
+    %>
+    <h6 id="rec8">[默认地址]</h6>
+    <h5 id="rec1"><%= ads.getName() %></h5>
+    <h6 id="rec2"><%= ads.getTelephone() %></h6>
+    <h6 id="rec9"><%= ads.getAddress() %></h6>
+    <%
+        }else{
+    %>
     <h5 id="rec1"><%= ads.getName() %></h5>
     <h6 id="rec2"><%= ads.getTelephone() %></h6>
     <h6 id="rec3"><%= ads.getAddress() %></h6>
+    <%
+        }
+    %>
 </div>
 <%
     }

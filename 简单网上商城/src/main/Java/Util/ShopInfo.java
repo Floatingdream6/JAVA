@@ -5,17 +5,15 @@ public class ShopInfo {
     private double shopprice;               //价格
     private int shopnumber;              //数量
     private String shoparea;               //产地
-    private String owner;                   //拥有者
 
     public ShopInfo() {
     }
 
-    public ShopInfo(String shopname, double shopprice, int shopnumber, String shoparea, String owner) {
+    public ShopInfo(String shopname, double shopprice, int shopnumber, String shoparea) {
         this.shopname = shopname;
         this.shopprice = shopprice;
         this.shopnumber = shopnumber;
         this.shoparea = shoparea;
-        this.owner = owner;
     }
 
     public String getShopname() {
@@ -50,11 +48,13 @@ public class ShopInfo {
         this.shoparea = shoparea;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
+    @Override
+    public String toString() {
+        return "ShopInfo{" +
+                "shopname='" + shopname + '\'' +
+                ", shopprice=" + shopprice +
+                ", shopnumber=" + shopnumber +
+                ", shoparea='" + shoparea + '\'' +
+                '}';
     }
 }

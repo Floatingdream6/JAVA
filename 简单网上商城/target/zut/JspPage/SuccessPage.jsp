@@ -118,12 +118,20 @@
         var m = document.getElementById("searchmessage");
         var e = event || window.event || arguments.callee.caller.arguments[0];
         if(e && e.keyCode==13){
-            window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+            if(m.value=='') {
+                alert('搜索条件为空！');
+            }else{
+                window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+            }
         }
     }
     function search() {
         var m = document.getElementById("searchmessage");
-        window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+        if(m.value==''){
+            alert('搜索条件为空！');
+        }else{
+            window.location.href='/ShopDemo_war_exploded/Servlet/SearchShopServlet?message='+m.value+'';
+        }
     }
 </script>
 </body>

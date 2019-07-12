@@ -27,7 +27,7 @@ public class SearchShopServlet extends HttpServlet {
         if(list.size()==0){
             p.println("<script language='javascript'>");
             p.println("alert('查询无结果！');");
-            p.println("window.location.href='/ShopDemo_war_exploded/JspPage/SuccessPage.jsp'");
+            p.println("window.history.back(-1)");
             p.println("</script>");
         }else{
             session.setAttribute("message",message);

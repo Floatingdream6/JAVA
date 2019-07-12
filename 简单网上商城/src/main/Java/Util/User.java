@@ -5,14 +5,16 @@ public class User {
     private String petname;             //昵称
     private String username;
     private String password;
+    private int identity;
 
     public User() {
     }
 
-    public User(String petname,String username, String password) {
+    public User(String petname,String username, String password,int identity) {
         this.petname = petname;
         this.username = username;
         this.password = password;
+        this.identity = identity;
     }
 
     public String getPassword() {
@@ -37,5 +39,13 @@ public class User {
 
     public void setPetname(String petname) {
         this.petname = petname;
+    }
+
+    public int getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(int identity) {
+        this.identity = identity;
     }
 }
